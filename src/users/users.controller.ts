@@ -11,40 +11,40 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { RolesGuard } from '../auth/roles.guard';
-import { Roles } from '../auth/roles.decorator';
+import { RulesGuard } from '../auth/rules.guard';
+import { Rules } from '../auth/rules.decorator';
 
 @Controller('users')
-@UseGuards(RolesGuard)
+@UseGuards(RulesGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
 
   @Post()
-  @Roles('users.create')
+  @Rules('users.create')
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
   @Get()
-  @Roles('users.view')
+  @Rules('users.view')
   findAll() {
     return this.usersService.findAll();
   }
 
   @Get(':id')
-  @Roles('users.view')
+  @Rules('users.view')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
   }
 
   @Patch(':id')
-  @Roles('users.edit')
+  @Rules('users.edit')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
   }
 
   @Delete(':id')
-  @Roles('users.delete')
+  @Rules('users.delete')
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
   }

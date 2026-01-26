@@ -11,40 +11,40 @@ import {
 import { CausesService } from './causes.service';
 import { CreateCauseDto } from './dto/create-cause.dto';
 import { UpdateCauseDto } from './dto/update-cause.dto';
-import { RolesGuard } from '../auth/roles.guard';
-import { Roles } from '../auth/roles.decorator';
+import { RulesGuard } from '../auth/rules.guard';
+import { Rules } from '../auth/rules.decorator';
 
 @Controller('causes')
-@UseGuards(RolesGuard)
+@UseGuards(RulesGuard)
 export class CausesController {
   constructor(private readonly causesService: CausesService) { }
 
   @Post()
-  @Roles('causes.create')
+  @Rules('causes.create')
   create(@Body() createCauseDto: CreateCauseDto) {
     return this.causesService.create(createCauseDto);
   }
 
   @Get()
-  @Roles('causes.view')
+  @Rules('causes.view')
   findAll() {
     return this.causesService.findAll();
   }
 
   @Get(':id')
-  @Roles('causes.view')
+  @Rules('causes.view')
   findOne(@Param('id') id: string) {
     return this.causesService.findOne(+id);
   }
 
   @Patch(':id')
-  @Roles('causes.edit')
+  @Rules('causes.edit')
   update(@Param('id') id: string, @Body() updateCauseDto: UpdateCauseDto) {
     return this.causesService.update(+id, updateCauseDto);
   }
 
   @Delete(':id')
-  @Roles('causes.delete')
+  @Rules('causes.delete')
   remove(@Param('id') id: string) {
     return this.causesService.remove(+id);
   }

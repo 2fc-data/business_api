@@ -11,40 +11,40 @@ import {
 import { CourtsService } from './courts.service';
 import { CreateCourtDto } from './dto/create-court.dto';
 import { UpdateCourtDto } from './dto/update-court.dto';
-import { RolesGuard } from '../auth/roles.guard';
-import { Roles } from '../auth/roles.decorator';
+import { RulesGuard } from '../auth/rules.guard';
+import { Rules } from '../auth/rules.decorator';
 
 @Controller('courts')
-@UseGuards(RolesGuard)
+@UseGuards(RulesGuard)
 export class CourtsController {
   constructor(private readonly courtsService: CourtsService) { }
 
   @Post()
-  @Roles('settings.manage')
+  @Rules('settings.manage')
   create(@Body() createCourtDto: CreateCourtDto) {
     return this.courtsService.create(createCourtDto);
   }
 
   @Get()
-  @Roles('settings.manage', 'causes.view')
+  @Rules('settings.manage', 'causes.view')
   findAll() {
     return this.courtsService.findAll();
   }
 
   @Get(':id')
-  @Roles('settings.manage')
+  @Rules('settings.manage')
   findOne(@Param('id') id: string) {
     return this.courtsService.findOne(+id);
   }
 
   @Patch(':id')
-  @Roles('settings.manage')
+  @Rules('settings.manage')
   update(@Param('id') id: string, @Body() updateCourtDto: UpdateCourtDto) {
     return this.courtsService.update(+id, updateCourtDto);
   }
 
   @Delete(':id')
-  @Roles('settings.manage')
+  @Rules('settings.manage')
   remove(@Param('id') id: string) {
     return this.courtsService.remove(+id);
   }

@@ -1,7 +1,7 @@
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
-@Table({ tableName: 'roles' })
-export class Role extends Model {
+@Table({ tableName: 'rules' })
+export class Rule extends Model {
   @Column({
     type: DataType.STRING(50),
     allowNull: false,

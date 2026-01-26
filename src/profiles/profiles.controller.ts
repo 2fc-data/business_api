@@ -11,40 +11,40 @@ import {
 import { ProfilesService } from './profiles.service';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
-import { RolesGuard } from '../auth/roles.guard';
-import { Roles } from '../auth/roles.decorator';
+import { RulesGuard } from '../auth/rules.guard';
+import { Rules } from '../auth/rules.decorator';
 
 @Controller('profiles')
-@UseGuards(RolesGuard)
+@UseGuards(RulesGuard)
 export class ProfilesController {
   constructor(private readonly profilesService: ProfilesService) { }
 
   @Post()
-  @Roles('settings.manage')
+  @Rules('settings.manage')
   create(@Body() createProfileDto: CreateProfileDto) {
     return this.profilesService.create(createProfileDto);
   }
 
   @Get()
-  @Roles('users.view') // Viewing profiles is common for user management
+  @Rules('users.view') // Viewing profiles is common for user management
   findAll() {
     return this.profilesService.findAll();
   }
 
   @Get(':id')
-  @Roles('users.view')
+  @Rules('users.view')
   findOne(@Param('id') id: string) {
     return this.profilesService.findOne(+id);
   }
 
   @Patch(':id')
-  @Roles('settings.manage')
+  @Rules('settings.manage')
   update(@Param('id') id: string, @Body() updateProfileDto: UpdateProfileDto) {
     return this.profilesService.update(+id, updateProfileDto);
   }
 
   @Delete(':id')
-  @Roles('settings.manage')
+  @Rules('settings.manage')
   remove(@Param('id') id: string) {
     return this.profilesService.remove(+id);
   }

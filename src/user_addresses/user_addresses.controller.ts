@@ -11,34 +11,34 @@ import {
 import { UserAddressesService } from './user_addresses.service';
 import { CreateUserAddressDto } from './dto/create-user_address.dto';
 import { UpdateUserAddressDto } from './dto/update-user_address.dto';
-import { RolesGuard } from '../auth/roles.guard';
-import { Roles } from '../auth/roles.decorator';
+import { RulesGuard } from '../auth/rules.guard';
+import { Rules } from '../auth/rules.decorator';
 
 @Controller('user-addresses')
-@UseGuards(RolesGuard)
+@UseGuards(RulesGuard)
 export class UserAddressesController {
   constructor(private readonly userAddressesService: UserAddressesService) { }
 
   @Post()
-  @Roles('users.edit')
+  @Rules('users.edit')
   create(@Body() createUserAddressDto: CreateUserAddressDto) {
     return this.userAddressesService.create(createUserAddressDto);
   }
 
   @Get()
-  @Roles('users.view')
+  @Rules('users.view')
   findAll() {
     return this.userAddressesService.findAll();
   }
 
   @Get(':id')
-  @Roles('users.view')
+  @Rules('users.view')
   findOne(@Param('id') id: string) {
     return this.userAddressesService.findOne(+id);
   }
 
   @Patch(':id')
-  @Roles('users.edit')
+  @Rules('users.edit')
   update(
     @Param('id') id: string,
     @Body() updateUserAddressDto: UpdateUserAddressDto,
@@ -47,7 +47,7 @@ export class UserAddressesController {
   }
 
   @Delete(':id')
-  @Roles('users.edit')
+  @Rules('users.edit')
   remove(@Param('id') id: string) {
     return this.userAddressesService.remove(+id);
   }

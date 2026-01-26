@@ -112,25 +112,25 @@ module.exports = {
     await queryInterface.addIndex('user_profiles', ['user_id']);
     await queryInterface.addIndex('user_profiles', ['profile_id']);
 
-    // 7. Roles
-    await queryInterface.createTable('roles', {
+    // 7. Rules
+    await queryInterface.createTable('rules', {
       id: { type: Sequelize.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true },
       name: { type: Sequelize.STRING(50), allowNull: false, unique: true },
       description: { type: Sequelize.TEXT },
       is_active: { type: Sequelize.BOOLEAN, defaultValue: true },
       ...commonFields,
     });
-    await queryInterface.addIndex('roles', ['name']);
+    await queryInterface.addIndex('rules', ['name']);
 
-    // 8. Profile Roles
-    await queryInterface.createTable('profile_roles', {
+    // 8. Profile Rules
+    await queryInterface.createTable('profile_rules', {
       profile_id: { type: Sequelize.INTEGER.UNSIGNED, allowNull: false, references: { model: 'profiles', key: 'id' }, onDelete: 'CASCADE' },
-      role_id: { type: Sequelize.INTEGER.UNSIGNED, allowNull: false, references: { model: 'roles', key: 'id' }, onDelete: 'CASCADE' },
+      rule_id: { type: Sequelize.INTEGER.UNSIGNED, allowNull: false, references: { model: 'rules', key: 'id' }, onDelete: 'CASCADE' },
       created_at: commonFields.created_at,
     });
-    await queryInterface.addConstraint('profile_roles', { fields: ['profile_id', 'role_id'], type: 'primary key' });
-    await queryInterface.addIndex('profile_roles', ['profile_id']);
-    await queryInterface.addIndex('profile_roles', ['role_id']);
+    await queryInterface.addConstraint('profile_rules', { fields: ['profile_id', 'rule_id'], type: 'primary key' });
+    await queryInterface.addIndex('profile_rules', ['profile_id']);
+    await queryInterface.addIndex('profile_rules', ['rule_id']);
 
     // 9. Courts
     await queryInterface.createTable('courts', {
@@ -295,8 +295,8 @@ module.exports = {
     await queryInterface.dropTable('statuses');
     await queryInterface.dropTable('court_divisions');
     await queryInterface.dropTable('courts');
-    await queryInterface.dropTable('profile_roles');
-    await queryInterface.dropTable('roles');
+    await queryInterface.dropTable('profile_rules');
+    await queryInterface.dropTable('rules');
     await queryInterface.dropTable('user_profiles');
     await queryInterface.dropTable('profiles');
     await queryInterface.dropTable('user_addresses');

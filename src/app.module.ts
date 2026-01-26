@@ -6,7 +6,7 @@ import { AppService } from './app.service';
 import { AreasModule } from './areas/areas.module';
 import { AddressesModule } from './addresses/addresses.module';
 import { ProfilesModule } from './profiles/profiles.module';
-import { RolesModule } from './roles/roles.module';
+import { RulesModule } from './rules/rules.module';
 import { StatusesModule } from './statuses/statuses.module';
 import { StagesModule } from './stages/stages.module';
 import { OutcomesModule } from './outcomes/outcomes.module';
@@ -51,7 +51,7 @@ import { CauseOutcomeHistoryModule } from './cause_outcome_history/cause_outcome
     AreasModule,
     AddressesModule,
     ProfilesModule,
-    RolesModule,
+    RulesModule,
     StatusesModule,
     StagesModule,
     OutcomesModule,
@@ -69,4 +69,4 @@ import { CauseOutcomeHistoryModule } from './cause_outcome_history/cause_outcome
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule { }    

@@ -11,18 +11,18 @@ import {
 import { CauseStageHistoryService } from './cause_stage_history.service';
 import { CreateCauseStageHistoryDto } from './dto/create-cause_stage_history.dto';
 import { UpdateCauseStageHistoryDto } from './dto/update-cause_stage_history.dto';
-import { RolesGuard } from '../auth/roles.guard';
-import { Roles } from '../auth/roles.decorator';
+import { RulesGuard } from '../auth/rules.guard';
+import { Rules } from '../auth/rules.decorator';
 
 @Controller('cause-stage-history')
-@UseGuards(RolesGuard)
+@UseGuards(RulesGuard)
 export class CauseStageHistoryController {
   constructor(
     private readonly causeStageHistoryService: CauseStageHistoryService,
   ) { }
 
   @Post()
-  @Roles('causes.edit')
+  @Rules('causes.edit')
   create(
     @Body() createCauseStageHistoryDto: CreateCauseStageHistoryDto,
   ) {
@@ -30,19 +30,19 @@ export class CauseStageHistoryController {
   }
 
   @Get()
-  @Roles('causes.view')
+  @Rules('causes.view')
   findAll() {
     return this.causeStageHistoryService.findAll();
   }
 
   @Get(':id')
-  @Roles('causes.view')
+  @Rules('causes.view')
   findOne(@Param('id') id: string) {
     return this.causeStageHistoryService.findOne(+id);
   }
 
   @Patch(':id')
-  @Roles('causes.edit')
+  @Rules('causes.edit')
   update(
     @Param('id') id: string,
     @Body() updateCauseStageHistoryDto: UpdateCauseStageHistoryDto,
@@ -54,7 +54,7 @@ export class CauseStageHistoryController {
   }
 
   @Delete(':id')
-  @Roles('causes.edit')
+  @Rules('causes.edit')
   remove(@Param('id') id: string) {
     return this.causeStageHistoryService.remove(+id);
   }

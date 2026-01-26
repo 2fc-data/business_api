@@ -11,34 +11,34 @@ import {
 import { CourtDivisionsService } from './court_divisions.service';
 import { CreateCourtDivisionDto } from './dto/create-court_division.dto';
 import { UpdateCourtDivisionDto } from './dto/update-court_division.dto';
-import { RolesGuard } from '../auth/roles.guard';
-import { Roles } from '../auth/roles.decorator';
+import { RulesGuard } from '../auth/rules.guard';
+import { Rules } from '../auth/rules.decorator';
 
 @Controller('court-divisions')
-@UseGuards(RolesGuard)
+@UseGuards(RulesGuard)
 export class CourtDivisionsController {
   constructor(private readonly courtDivisionsService: CourtDivisionsService) { }
 
   @Post()
-  @Roles('settings.manage')
+  @Rules('settings.manage')
   create(@Body() createCourtDivisionDto: CreateCourtDivisionDto) {
     return this.courtDivisionsService.create(createCourtDivisionDto);
   }
 
   @Get()
-  @Roles('settings.manage', 'causes.view')
+  @Rules('settings.manage', 'causes.view')
   findAll() {
     return this.courtDivisionsService.findAll();
   }
 
   @Get(':id')
-  @Roles('settings.manage')
+  @Rules('settings.manage')
   findOne(@Param('id') id: string) {
     return this.courtDivisionsService.findOne(+id);
   }
 
   @Patch(':id')
-  @Roles('settings.manage')
+  @Rules('settings.manage')
   update(
     @Param('id') id: string,
     @Body() updateCourtDivisionDto: UpdateCourtDivisionDto,
@@ -47,7 +47,7 @@ export class CourtDivisionsController {
   }
 
   @Delete(':id')
-  @Roles('settings.manage')
+  @Rules('settings.manage')
   remove(@Param('id') id: string) {
     return this.courtDivisionsService.remove(+id);
   }

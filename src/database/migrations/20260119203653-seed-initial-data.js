@@ -11,8 +11,8 @@ module.exports = {
       { id: 4, name: 'Cliente', description: 'Acesso limitado aos seus processos' },
     ]);
 
-    // Roles padrão
-    await queryInterface.bulkInsert('roles', [
+    // Rules padrão
+    await queryInterface.bulkInsert('rules', [
       { name: 'dashboard.view', description: 'Visualizar dashboard' },
       { name: 'users.view', description: 'Visualizar usuários' },
       { name: 'users.create', description: 'Criar usuários' },
@@ -88,7 +88,7 @@ module.exports = {
     await queryInterface.bulkDelete('outcomes', null, {});
     await queryInterface.bulkDelete('stages', null, {});
     await queryInterface.bulkDelete('statuses', null, {});
-    await queryInterface.bulkDelete('roles', null, {});
+    await queryInterface.bulkDelete('rules', null, {});
     await queryInterface.bulkDelete('profiles', null, {});
   }
 };

@@ -11,16 +11,16 @@ import {
 import { AreasService } from './areas.service';
 import { CreateAreaDto } from './dto/create-area.dto';
 import { UpdateAreaDto } from './dto/update-area.dto';
-import { RolesGuard } from '../auth/roles.guard';
-import { Roles } from '../auth/roles.decorator';
+import { RulesGuard } from '../auth/rules.guard';
+import { Rules } from '../auth/rules.decorator';
 
 @Controller('areas')
-@UseGuards(RolesGuard)
+@UseGuards(RulesGuard)
 export class AreasController {
   constructor(private readonly areasService: AreasService) { }
 
   @Post()
-  @Roles('settings.manage')
+  @Rules('settings.manage')
   create(@Body() createAreaDto: CreateAreaDto) {
     return this.areasService.create(createAreaDto);
   }
@@ -29,25 +29,25 @@ export class AreasController {
   // No specific role for viewing areas? Maybe public or basic auth. 
   // For now assuming open or requiring 'dashboard.view' just to test.
   // Using 'settings.manage' as it seems administrative.
-  @Roles('settings.manage')
+  @Rules('settings.manage')
   findAll() {
     return this.areasService.findAll();
   }
 
   @Get(':id')
-  @Roles('settings.manage')
+  @Rules('settings.manage')
   findOne(@Param('id') id: string) {
     return this.areasService.findOne(+id);
   }
 
   @Patch(':id')
-  @Roles('settings.manage')
+  @Rules('settings.manage')
   update(@Param('id') id: string, @Body() updateAreaDto: UpdateAreaDto) {
     return this.areasService.update(+id, updateAreaDto);
   }
 
   @Delete(':id')
-  @Roles('settings.manage')
+  @Rules('settings.manage')
   remove(@Param('id') id: string) {
     return this.areasService.remove(+id);
   }

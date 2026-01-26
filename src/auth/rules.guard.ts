@@ -1,28 +1,28 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { ROLES_KEY } from './roles.decorator';
+import { RULES_KEY } from './rules.decorator';
 
 @Injectable()
-export class RolesGuard implements CanActivate {
+export class RulesGuard implements CanActivate {
   constructor(private reflector: Reflector) { }
 
   canActivate(context: ExecutionContext): boolean {
-    const requiredRoles = this.reflector.getAllAndOverride<string[]>(ROLES_KEY, [
+    const requiredRules = this.reflector.getAllAndOverride<string[]>(RULES_KEY, [
       context.getHandler(),
       context.getClass(),
     ]);
-    if (!requiredRoles) {
+    if (!requiredRules) {
       return true;
     }
     const { user } = context.switchToHttp().getRequest();
 
     // If no user is attached (e.g. no AuthGuard ran before), deny or allow?
     // For now, if no user, deny.
-    if (!user || !user.roles) {
-      console.warn('RolesGuard: No user or roles found on request. ensure AuthGuard is running.');
+    if (!user || !user.rules) {
+      console.warn('RulesGuard: No user or rules found on request. ensure AuthGuard is running.');
       return false; // Strict by default
     }
 
-    return requiredRoles.some((role) => user.roles?.includes(role));
+    return requiredRules.some((rule) => user.rules?.includes(rule));
   }
 }
