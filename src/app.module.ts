@@ -20,6 +20,7 @@ import { CauseUsersModule } from './cause_users/cause_users.module';
 import { CauseStatusHistoryModule } from './cause_status_history/cause_status_history.module';
 import { CauseStageHistoryModule } from './cause_stage_history/cause_stage_history.module';
 import { CauseOutcomeHistoryModule } from './cause_outcome_history/cause_outcome_history.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -65,6 +66,7 @@ import { CauseOutcomeHistoryModule } from './cause_outcome_history/cause_outcome
     CauseStatusHistoryModule,
     CauseStageHistoryModule,
     CauseOutcomeHistoryModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
