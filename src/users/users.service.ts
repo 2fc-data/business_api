@@ -41,6 +41,12 @@ export class UsersService {
     });
   }
 
+  async findOneByUsername(username: string): Promise<User | null> {
+    return this.userModel.findOne({
+      where: { username },
+    });
+  }
+
   update(id: number, updateUserDto: UpdateUserDto) {
     // Basic update logic. If password update is needed, it would be handled similarly to create.
     return this.userModel.update(updateUserDto, {

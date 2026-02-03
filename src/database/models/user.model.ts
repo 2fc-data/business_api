@@ -6,14 +6,14 @@ export class User extends Model {
     type: DataType.STRING(150),
     allowNull: false,
   })
-  name: string;
+  declare name: string;
 
   @Column({
     type: DataType.STRING(50),
     allowNull: false,
     unique: true,
   })
-  username: string;
+  declare username: string;
 
   @Column({
     type: DataType.STRING(20),
@@ -21,39 +21,39 @@ export class User extends Model {
     unique: true,
     comment: 'CPF/CNPJ',
   })
-  document: string;
+  declare document: string;
 
   @Column({
     type: DataType.STRING(150),
     allowNull: false,
     unique: true,
   })
-  email: string;
+  declare email: string;
 
   @Column({
     type: DataType.STRING(20),
   })
-  phone1: string;
+  declare phone1: string;
 
   @Column({
     type: DataType.STRING(20),
   })
-  phone2: string;
+  declare phone2: string;
 
   @Column({
     type: DataType.STRING(255),
     allowNull: false,
   })
-  password_hash: string;
+  declare password_hash: string;
 
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: true,
   })
-  is_active: boolean;
+  declare is_active: boolean;
 
   @Column({
     type: DataType.DATE,
   })
-  email_verified_at: Date;
+  declare email_verified_at: Date;
 }
