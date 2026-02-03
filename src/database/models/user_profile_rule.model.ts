@@ -8,12 +8,12 @@ import {
 } from 'sequelize-typescript';
 import { User } from './user.model';
 import { Profile } from './profile.model';
+import { Rule } from './rule.model';
 
-@Table({ tableName: 'user_profiles' })
-export class UserProfile extends Model {
+@Table({ tableName: 'users_profiles_rules', updatedAt: false })
+export class UserProfileRule extends Model {
   @ForeignKey(() => User)
   @Column({
-    primaryKey: true,
     type: DataType.INTEGER.UNSIGNED,
     allowNull: false,
   })
@@ -21,15 +21,24 @@ export class UserProfile extends Model {
 
   @ForeignKey(() => Profile)
   @Column({
-    primaryKey: true,
     type: DataType.INTEGER.UNSIGNED,
     allowNull: false,
   })
   profile_id: number;
+
+  @ForeignKey(() => Rule)
+  @Column({
+    type: DataType.INTEGER.UNSIGNED,
+    allowNull: false,
+  })
+  rule_id: number;
 
   @BelongsTo(() => User)
   user: User;
 
   @BelongsTo(() => Profile)
   profile: Profile;
+
+  @BelongsTo(() => Rule)
+  rule: Rule;
 }
